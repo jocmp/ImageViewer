@@ -1,10 +1,9 @@
-// swift-tools-version:5.1
-
+// swift-tools-version:5.9
 import PackageDescription
 
 let package = Package(
   name: "ImageViewer",
-  platforms: [.iOS(.v13)],
+  platforms: [.iOS(.v16)],
   products: [.library(name: "ImageViewer", targets: ["ImageViewer"])],
   targets: [
     .target(
