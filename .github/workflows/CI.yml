@@ -20,6 +20,12 @@ jobs:
           scheme: ${{ matrix.run-config['scheme'] }}
         run: xcodebuild -scheme ${scheme} -showdestinations
       - name: Build
-        run: swift build -v
+        run: xcodebuild build -scheme ${scheme} -destination "${destination}"
+        env:
+          scheme: ${{ matrix.run-config['scheme'] }}
+          destination: ${{ matrix.run-config['destination'] }}
       - name: Run tests
-        run: swift test -v
+        run: xcodebuild test -scheme ${scheme} -destination "${destination}"
+        env:
+          scheme: ${{ matrix.run-config['scheme'] }}
+          destination: ${{ matrix.run-config['destination'] }}
