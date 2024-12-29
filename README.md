@@ -1,4 +1,4 @@
-![Tests](https://github.com/jocmp/ImageViewer/actions/workflows/ci.yml/badge.svg)
+![Tests](https://github.com/jocmp/ImageViewer/actions/workflows/CI.yml/badge.svg)
 
 ![Single image view](https://github.com/jocmp/ImageViewer/blob/main/Documentation/single.gif)
 
