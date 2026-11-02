@@ -8,15 +8,15 @@
 
 import UIKit
 
-class ThumbnailCell: UICollectionViewCell {
+final class ThumbnailCell: UICollectionViewCell {
 
     let imageView = UIImageView()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        imageView.backgroundColor = UIColor.clear
-        imageView.contentMode = .scaleAspectFit
-        self.contentView.addSubview(imageView)
+        self.imageView.backgroundColor = UIColor.clear
+        self.imageView.contentMode = .scaleAspectFit
+        self.contentView.addSubview(self.imageView)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -24,7 +24,7 @@ class ThumbnailCell: UICollectionViewCell {
     }
 
     override func layoutSubviews() {
-        imageView.frame = bounds
+        self.imageView.frame = bounds
         super.layoutSubviews()
     }
 }

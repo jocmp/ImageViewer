@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 extension CGRect {
 
     init(x: CGFloat, y: CGFloat, width: CGFloat, height: CGFloat) {
@@ -18,6 +17,6 @@ extension CGRect {
 
     static var one: CGRect {
 
-        return CGRect(x: 0, y: 0, width: 1, height: 1)
+        CGRect(x: 0, y: 0, width: 1, height: 1)
     }
 }

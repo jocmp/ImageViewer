@@ -6,28 +6,29 @@
 //  Copyright © 2016 MailOnline. All rights reserved.
 //
 
-import UIKit
 import AVFoundation
+import UIKit
 
-class VideoView: UIView {
+final class VideoView: UIView {
 
     let previewImageView = UIImageView()
-    var image: UIImage? { didSet { previewImageView.image = image } }
+    var image: UIImage? { didSet { self.previewImageView.image = self.image } }
     var player: AVPlayer? {
 
         willSet {
 
             if newValue == nil {
 
-                player?.removeObserver(self, forKeyPath: "status")
-                player?.removeObserver(self, forKeyPath: "rate")
+                self.player?.removeObserver(self, forKeyPath: "status")
+                self.player?.removeObserver(self, forKeyPath: "rate")
             }
         }
 
         didSet {
 
-            if  let player = self.player,
-                let videoLayer = self.layer as? AVPlayerLayer {
+            if let player = self.player,
+               let videoLayer = self.layer as? AVPlayerLayer
+            {
 
                 videoLayer.player = player
                 videoLayer.videoGravity = AVLayerVideoGravity.resizeAspect
@@ -38,8 +39,8 @@ class VideoView: UIView {
         }
     }
 
-    override class var layerClass : AnyClass {
-        return AVPlayerLayer.self
+    override class var layerClass: AnyClass {
+        AVPlayerLayer.self
     }
 
     convenience init() {
@@ -49,11 +50,11 @@ class VideoView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        self.addSubview(previewImageView)
+        self.addSubview(self.previewImageView)
 
-        previewImageView.contentMode = .scaleAspectFill
-        previewImageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        previewImageView.clipsToBounds = true
+        self.previewImageView.contentMode = .scaleAspectFill
+        self.previewImageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        self.previewImageView.clipsToBounds = true
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -66,11 +67,17 @@ class VideoView: UIView {
         player?.removeObserver(self, forKeyPath: "rate")
     }
 
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+    // swiftlint:disable:next block_based_kvo
+    override func observeValue(
+        forKeyPath keyPath: String?,
+        of object: Any?,
+        change: [NSKeyValueChangeKey: Any]?,
+        context: UnsafeMutableRawPointer?
+    ) {
 
-        if let status = self.player?.status, let rate = self.player?.rate  {
+        if let status = self.player?.status, let rate = self.player?.rate {
 
-            if status == .readyToPlay && rate != 0 {
+            if status == .readyToPlay, rate != 0 {
 
                 UIView.animate(withDuration: 0.3, animations: { [weak self] in
 
